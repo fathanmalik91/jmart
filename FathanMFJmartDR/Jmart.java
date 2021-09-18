@@ -9,27 +9,27 @@ package FathanMFJmartDR;
  */
 public class Jmart
 {
-    // instance variables - replace the example below with your own
+     // instance variables - replace the example below with your own
     private int x;
 
     /**
      * Constructor for objects of class Jmart
      */
-    public Jmart()
-    {
+    public Jmart() {
         // initialise instance variables
         x = 0;
     }
+    
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
-    {
+    public static void main(String[] message) {
         // put your code here
-        return x + y;
+        
     }
+    public static Product Create(){
+        PriceTag pricet= new PriceTag(1000,0);
+        Product p = new Product ("duck", 23, false, pricet , ProductCategory.PETCARE);
+        return p;
+    }
+    
+    
 }
