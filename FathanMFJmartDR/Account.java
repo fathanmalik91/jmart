@@ -30,7 +30,12 @@ public class Account extends Recognizable implements FileParser
     public Object write(){
         return null;
     }
-
+    public String toString(){
+        return
+        "Name : "+this.name+
+        "\nemail : "+this.email+
+        "\npassword : "+this.password;
+    }
     public static Object newInstance(String content) {
         return null;
     }

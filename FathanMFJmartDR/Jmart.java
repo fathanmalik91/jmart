@@ -25,13 +25,13 @@ public class Jmart
         // put your code here
         
     }
-    public static Product Create(){
+/*    public static Product Create(){
         PriceTag pricet= new PriceTag(1000,0);
-        Product p = new Product ("duck", 23, false, pricet , ProductCategory.PETCARE);
+        Product p = new Product (1,11,"duck", 23, false, pricet , ProductCategory.PETCARE,3);
         return p;
     }
     
-    
+ */   
     public static Product createProduct(){
         return null;
     }

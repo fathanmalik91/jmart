@@ -7,11 +7,10 @@ comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Jmart\r\n
 comment2.params=message
 comment2.target=void\ main(java.lang.String[])
 comment3.params=
-comment3.target=Product\ Create()
+comment3.target=Product\ createProduct()
+comment3.text=\ \ \ \ public\ static\ Product\ Create(){\r\n\ \ \ \ \ \ \ \ PriceTag\ pricet\=\ new\ PriceTag(1000,0);\r\n\ \ \ \ \ \ \ \ Product\ p\ \=\ new\ Product\ (1,11,"duck",\ 23,\ false,\ pricet\ ,\ ProductCategory.PETCARE,3);\r\n\ \ \ \ \ \ \ \ return\ p;\r\n\ \ \ \ }\r\n\ \ \ \ \r\n
 comment4.params=
-comment4.target=Product\ createProduct()
+comment4.target=Product\ createCoupon()
 comment5.params=
-comment5.target=Product\ createCoupon()
-comment6.params=
-comment6.target=Product\ ShipmentDuration()
-numComments=7
+comment5.target=Product\ ShipmentDuration()
+numComments=6

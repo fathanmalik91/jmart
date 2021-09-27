@@ -8,31 +8,28 @@ package FathanMFJmartDR;
  * @version (a version number or a date)
  */
 // pake Transaction gabisa
-public class Payment extends Recognizable implements FileParser
+public class Payment extends Invoice implements Transactor
 {
-    public int productId;
-    public ShipmentDuration shipmentDuration;
+    public int productId, productCount;
+    public Shipment Shipment;
+    
 
-    public Payment(int id, int buyerId, Product product, ShipmentDuration shipmentDuration) {
-        super(id);
-        this.productId = product.id;
-        this.shipmentDuration = shipmentDuration;
-    }
 
-    public Payment(int id, int buyerId, int storeId, int productId, ShipmentDuration shipmentDuration) {
-        super(id);
+
+    public Payment(int id, int buyerId, int productId, int productCount,  Shipment Shipment) {
+        super(id,buyerId,productId);
         this.productId = productId;
-        this.shipmentDuration = shipmentDuration;
+        this.Shipment = Shipment;
     }
-
+    public double getTotalPay() {
+        return 0.0f;
+    }
     public boolean validate() {
         return false;
     }
-
-    public Transaction perform() {
+    public Invoice perform() {
         return null;
     }
-
     @Override
     public boolean read(String content){
         return false;

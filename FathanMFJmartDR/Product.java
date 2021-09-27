@@ -9,36 +9,39 @@ package FathanMFJmartDR;
  */
 public class Product extends Recognizable implements FileParser
 {
-    // instance variables - replace the example below with your own
-    private static int idCounter;
-    public int id;
+    public int storeId; 
     public String name;
     public int weight;
     public boolean conditionUsed;
-    public PriceTag PriceTag;
+    public PriceTag priceTag;
     public ProductCategory category;
     public ProductRating rating;
-    public int storeId;
-    
-    
+    public Shipment.MultiDuration multiDuration;
 
-    /**
-     * Constructor for objects of class Product
-     */
-    public Product (int id,  String name, int weight, boolean conditionUsed, PriceTag PriceTag, ProductCategory category){
+    public Product(int id, int storeId, String name, int weight, boolean conditionUsed, PriceTag priceTag, ProductCategory category, Shipment.MultiDuration multiDuration)
+    {
         super(id);
+        this.storeId = storeId;
         this.name = name;
         this.weight = weight;
         this.conditionUsed = conditionUsed;
-        this.PriceTag = PriceTag;
+        this.priceTag = priceTag;
         this.category = category;
-        
-        this.storeId= storeId;
+        this.rating = new ProductRating();
+        this.multiDuration = multiDuration;
     }
-    
+       public String toString() {
+        return 
+        "Name: " + this.name +
+        "\nWeight: " + this.weight +
+        "\nconditionUsed: " + this.conditionUsed +
+        "\npriceTag: " + this.priceTag +
+        "\ncategory: " + this.category +
+        "\nrating: " + this.rating +
+        "\nstoreId: " + this.storeId;
+    }
     @Override
     public boolean read(String content){
         return false;
     }
-    
 }
