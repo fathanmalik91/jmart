@@ -18,12 +18,14 @@ public class Jmart
     public Jmart() {
         // initialise instance variables
         x = 0;
+        
     }
     
 
     public static void main(String[] message) {
         // put your code here
-        
+        Store store = new Store(1, "Lopan 88 cuan max","Kelapa gading","021567988442");
+        store.validate();
     }
 /*    public static Product Create(){
         PriceTag pricet= new PriceTag(1000,0);
@@ -39,7 +41,8 @@ public class Jmart
         return null;
     }
     public static Product ShipmentDuration(){
-        return null;
+        return null;    
     }
+    
     
 }
