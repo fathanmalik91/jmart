@@ -1,5 +1,6 @@
 package FathanMFJmartDR;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Complaint extends Recognizable implements FileParser
 {
@@ -9,17 +10,18 @@ public class Complaint extends Recognizable implements FileParser
     
     
 
-    public Complaint(int id, Payment payment, String desc) {
+    public Complaint(int id, String desc) {
         super(id);
         
         this.desc = desc;
         this.date = new Date();
     }
 
-    public Complaint(int id, int buyerId, int storeId, int paymentId, String desc) {
-        super(id);
-        
-        this.desc = desc;
+    
+    public String toString(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = formatter.format(this.date);
+        return"\nComplaint{date=" + formattedDate + ", desc='" +this.desc+ "'}";
     }
 
     public boolean validate() {

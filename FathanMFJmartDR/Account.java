@@ -1,5 +1,6 @@
 package FathanMFJmartDR;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Write a description of class Account here.
@@ -11,7 +12,8 @@ public class Account extends Recognizable implements FileParser
 {
     // instance variables - replace the example below with your own
     public String name, email, password;
-
+    public static final String REGEX_EMAIL = "^(?!\\.)(?!.*?\\.\\.)[a-zA-Z0-9&_*~.]+@(?!\\-)[a-zA-Z0-9-]+.(?!.*\\.$)[a-zA-Z0-9.]+$"; 
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d](\\S){8,}$";
     
       public Account(int id, String name, String email, String password)
     {
@@ -19,6 +21,21 @@ public class Account extends Recognizable implements FileParser
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+    public boolean validate()
+    {
+        Pattern patternEmail = Pattern.compile(REGEX_EMAIL);
+        Matcher matcherEmail = patternEmail.matcher(email);
+        Pattern patternPassword = Pattern.compile(REGEX_PASSWORD);
+        Matcher matcherPassword = patternPassword.matcher(password);
+        boolean matchEmail = matcherEmail.find();
+        boolean matchPassword = matcherPassword.find();
+
+        if (matchEmail == true && matchPassword==true){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
@@ -32,7 +49,7 @@ public class Account extends Recognizable implements FileParser
     }
     public String toString(){
         return
-        "Name : "+this.name+
+        "\nName : "+this.name+
         "\nemail : "+this.email+
         "\npassword : "+this.password;
     }

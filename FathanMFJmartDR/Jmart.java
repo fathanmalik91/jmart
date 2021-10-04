@@ -26,6 +26,13 @@ public class Jmart
         // put your code here
         Store store = new Store(1, "Lopan 88 cuan max","Kelapa gading","021567988442");
         store.validate();
+        System.out.print(store);
+        Account account = new Account(1,"CaoCao","WUcao@gmail.com","ChingChong1");
+        account.validate();
+        System.out.print(account);
+        Complaint komplain = new Complaint (1333," kurirnya maling ");
+        System.out.print(komplain);
+        
     }
 /*    public static Product Create(){
         PriceTag pricet= new PriceTag(1000,0);
