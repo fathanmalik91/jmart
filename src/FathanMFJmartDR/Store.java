@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Store extends Recognizable implements FileParser
+public class Store extends Recognizable
 {
     public String name, address, phoneNumber;
     public static final String REGEX_PHONE = "^\\d{9,12}$";
@@ -35,7 +35,7 @@ public class Store extends Recognizable implements FileParser
         return matcher.find() && matcher2.find();
     }
     
-    @Override
+
     public boolean read(String content){
         return false;
     }

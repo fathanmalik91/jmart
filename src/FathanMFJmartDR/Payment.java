@@ -8,7 +8,7 @@ package FathanMFJmartDR;
  * @version (a version number or a date)
  */
 // pake Transaction gabisa
-public class Payment extends Invoice implements Transactor
+public class Payment extends Invoice
 {
     public int productId, productCount;
     public Shipment Shipment;

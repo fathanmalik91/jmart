@@ -2,7 +2,7 @@ package FathanMFJmartDR;
 
 
 
-public class Coupon extends Recognizable implements FileParser
+public class Coupon extends Recognizable
 {
     public String name;
     public int code;
@@ -38,23 +38,23 @@ public class Coupon extends Recognizable implements FileParser
     {
         return this.used;
     }
-    public boolean canApply(PriceTag priceTag){
-        if (priceTag.getAdjustedPrice() >= minimum & used== false ){
+    public boolean canApply(Treasury treasury){
+        if (treasury.getAdjustedPrice() >= minimum & used== false ){
             return true;
         }else{
             return false;
         }
     }
-    public double apply (PriceTag priceTag){
+    public double apply (Treasury treasury){
         this.used=true;
         if(type==Type.REBATE){
-            return priceTag.getAdjustedPrice() - this.cut;
+            return treasury.getAdjustedPrice() - this.cut;
         }
         else{
-           return priceTag.getAdjustedPrice() - (priceTag.getAdjustedPrice() *(100- this.cut) /100);
+           return treasury.getAdjustedPrice() - (treasury.getAdjustedPrice() *(100- this.cut) /100);
         }
     }
-    @Override
+
     public boolean read(String content){
         return false;
     }

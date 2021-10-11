@@ -8,10 +8,11 @@ import java.util.regex.Pattern;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Account extends Recognizable implements FileParser
+public class Account extends Recognizable
 {
     // instance variables - replace the example below with your own
     public String name, email, password;
+    public Store store;
     public static final String REGEX_EMAIL = "^(?!\\.)(?!.*?\\.\\.)[a-zA-Z0-9&_*~.]+@(?!\\-)[a-zA-Z0-9-]+.(?!.*\\.$)[a-zA-Z0-9.]+$"; 
     public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d](\\S){8,}$";
     
@@ -38,12 +39,12 @@ public class Account extends Recognizable implements FileParser
         }
     }
 
-    @Override
+
     public boolean read(String content){
         return false;
     }
 
-    @Override
+
     public Object write(){
         return null;
     }

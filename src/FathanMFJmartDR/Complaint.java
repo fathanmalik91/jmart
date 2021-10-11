@@ -2,7 +2,7 @@ package FathanMFJmartDR;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-public class Complaint extends Recognizable implements FileParser
+public class Complaint extends Recognizable
 {
     
     public String desc;
@@ -28,11 +28,9 @@ public class Complaint extends Recognizable implements FileParser
         return false;
     }
 
-    public Transactor perform() {
-        return null;
-    }
 
-    @Override
+
+
     public boolean read(String content){
         return false;
     }

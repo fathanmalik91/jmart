@@ -9,7 +9,7 @@ import java.util.Date;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Invoice extends Recognizable implements FileParser
+public class Invoice extends Recognizable
 {
     public String date;
     public int buyerId, productId,complaintId;
@@ -49,7 +49,7 @@ public class Invoice extends Recognizable implements FileParser
         this.status = status.WAITING_CONFIRMATION;
     }
 
-    @Override
+
     public boolean read(String content){
         return false;
     }
