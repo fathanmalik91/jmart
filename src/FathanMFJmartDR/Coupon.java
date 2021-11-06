@@ -2,7 +2,7 @@ package FathanMFJmartDR;
 
 
 
-public class Coupon extends Recognizable
+public class Coupon extends Serializable
 {
     public String name;
     public int code;

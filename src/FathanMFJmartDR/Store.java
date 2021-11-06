@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Store extends Recognizable
+public class Store extends Serializable
 {
     public String name, address, phoneNumber;
     public static final String REGEX_PHONE = "^\\d{9,12}$";

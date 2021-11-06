@@ -9,9 +9,9 @@ import java.util.Date;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Invoice extends Recognizable
+public class Invoice extends Serializable
 {
-    public String date;
+    public Date date;
     public int buyerId, productId,complaintId;
     public Rating rating;
     public Status status;
@@ -39,12 +39,12 @@ public class Invoice extends Recognizable
         public String message;
     }
 
-    protected Invoice(int id, int buyerId, int productId)
+    protected Invoice( int buyerId, int productId)
     {
-        super(id);
+
         this.buyerId = buyerId;
         this.productId = productId;
-        this.date = "";
+        this.date = new Date();
         this.rating = Rating.NONE;
         this.status = status.WAITING_CONFIRMATION;
     }

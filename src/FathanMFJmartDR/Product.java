@@ -7,7 +7,7 @@ package FathanMFJmartDR;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Product extends Recognizable
+public class Product extends Serializable
 {
     public int storeId; 
     public String name;
