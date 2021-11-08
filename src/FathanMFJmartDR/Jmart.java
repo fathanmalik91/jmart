@@ -42,7 +42,13 @@ public class Jmart{
 
 
     private static List<Product> paginate (List<Product> list, int page, int pageSize, Predicate<Product> pred){
-        return list.stream().filter(a -> pred.predicate(a)).skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
+        if(page <0 ){
+            page=0;
+        }if(pageSize<0){
+            pageSize=0;
+        }
+            return list.stream().filter(a -> pred.predicate(a)).skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
+
     }
 
 
@@ -76,7 +82,7 @@ public class Jmart{
 
             List<Product> nameFiltered = filterByName(list, "gtx", 1, 5);
             nameFiltered.forEach(product -> System.out.println(product.name));
-            List<Product> accountFiltered = filterByAccountId(list, 1, 0, 5);
+            List<Product> accountFiltered = filterByAccountId(list, 1, -1, 5);
             accountFiltered.forEach(product -> System.out.println(product.name));
 
         }catch (Throwable t)
