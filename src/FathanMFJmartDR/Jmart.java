@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
@@ -16,9 +18,42 @@ import com.google.gson.stream.JsonReader;
 public class Jmart{
     public static List<Product> filterByCategory(List<Product> list, ProductCategory category){
         return Algorithm.collect(
-                list.iterator(),
-                (Predicate<Product>) product -> category == product.category
-        );
+                list.iterator(),(Predicate<Product>) product -> category == product.category);
+    }
+    public static List<Product> filterByPrice(List<Product> list, double minPrice, double maxPrice){
+        List<Product> products = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++){
+            if(minPrice <= 0.0){
+                if(list.get(i).price <= maxPrice){
+                    products.add(list.get(i));
+                }
+            }else if(maxPrice <= 0.0){
+                if(list.get(i).price >= minPrice){
+                    products.add(list.get(i));
+                }
+            }else{
+                if(list.get(i).price >= minPrice && list.get(i).price <= maxPrice){
+                    products.add(list.get(i));
+                }
+            }
+        }
+        return products;
+    }
+
+
+    private static List<Product> paginate (List<Product> list, int page, int pageSize, Predicate<Product> pred){
+        return list.stream().filter(a -> pred.predicate(a)).skip(page * pageSize).limit(pageSize).collect(Collectors.toList());
+    }
+
+
+    public static List<Product> filterByName(List<Product> list, String search, int page, int pageSize) {
+        Predicate<Product> predicate = a -> (a.name.toLowerCase().contains(search.toLowerCase()));
+        return paginate(list, page, pageSize, predicate);
+    }
+
+    public static List<Product> filterByAccountId(List<Product> list, int accountId, int page, int pageSize) {
+        Predicate<Product> predicate = a -> (a.accountId == accountId);
+        return paginate(list, page, pageSize, predicate);
     }
 
 
@@ -33,6 +68,21 @@ public class Jmart{
     }
 
     public static void main(String[] args) {
+        try{
+            // sesuaikan argument method read sesuai dengan lokasi resource
+            List<Product> list = read("F:/GITHUB OOP/JMART/src/FathanMFJmartDR/randomProductList.json");
+            List<Product> filtered = filterByPrice(list, 13000.0, 15000.0);
+            filtered.forEach(product -> System.out.println(product.price));
+
+            List<Product> nameFiltered = filterByName(list, "gtx", 1, 5);
+            nameFiltered.forEach(product -> System.out.println(product.name));
+            List<Product> accountFiltered = filterByAccountId(list, 1, 0, 5);
+            accountFiltered.forEach(product -> System.out.println(product.name));
+
+        }catch (Throwable t)
+        {
+            t.printStackTrace();
+        }
 
 
 
