@@ -75,7 +75,18 @@ public class Jmart{
 
     public static void main(String[] args) {
         try{
-            // sesuaikan argument method read sesuai dengan lokasi resource
+            String filepath = "F:/GITHUB OOP/JMART/src/FathanMFJmartDR/account.json";
+
+            JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
+            tableAccount.add(new Account("name", "email", "password"));
+            tableAccount.writeJson();
+
+            tableAccount = new JsonTable<>(Account.class, filepath);
+            tableAccount.forEach(account -> System.out.println(account.toString()));
+
+
+
+       /*     // sesuaikan argument method read sesuai dengan lokasi resource
             List<Product> list = read("F:/GITHUB OOP/JMART/src/FathanMFJmartDR/randomProductList.json");
             List<Product> filtered = filterByPrice(list, 13000.0, 15000.0);
             filtered.forEach(product -> System.out.println(product.price));
@@ -84,7 +95,7 @@ public class Jmart{
             nameFiltered.forEach(product -> System.out.println(product.name));
             List<Product> accountFiltered = filterByAccountId(list, 1, -1, 5);
             accountFiltered.forEach(product -> System.out.println(product.name));
-
+        */
         }catch (Throwable t)
         {
             t.printStackTrace();
@@ -93,7 +104,7 @@ public class Jmart{
 
 
 
-        System.out.println("account id:" + new Account(null, null, null, -1).id);
+     /*   System.out.println("account id:" + new Account(null, null, null, -1).id);
         System.out.println("account id:" + new Account(null, null, null, -1).id);
         System.out.println("account id:" + new Account(null, null, null, -1).id);
 
@@ -102,7 +113,7 @@ public class Jmart{
         System.out.println("payment id:" + new Payment(-1, -1, -1, null).id);
 
 
-
+    */
 
 
     }

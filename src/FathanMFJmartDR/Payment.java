@@ -12,8 +12,6 @@ public class Payment extends Invoice
 {
     public int productId, productCount;
     public Shipment Shipment;
-    
-
 
 
     public Payment( int buyerId, int productId, int productCount,  Shipment Shipment) {
