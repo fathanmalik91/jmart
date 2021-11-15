@@ -1,6 +1,9 @@
 package FathanMFJmartDR;
 
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Write a description of class Payment here.
  *
@@ -10,24 +13,39 @@ package FathanMFJmartDR;
 // pake Transaction gabisa
 public class Payment extends Invoice
 {
-    public int productId, productCount;
+    public transient int productId, productCount;
     public Shipment Shipment;
+    public ArrayList<Record> history = new ArrayList<>();
 
+    static class Record {
+        public final Date date;
+        public String message;
+        public Status status;
 
-    public Payment( int buyerId, int productId, int productCount,  Shipment Shipment) {
-        super(buyerId,productId);
-        this.productId = productId;
-        this.Shipment = Shipment;
+        public Record(Status status, String message) {
+            this.date = new Date();
+            this.status = status;
+            this.message = message;
+        }
     }
-    public double getTotalPay() {
-        return 0.0f;
+
+    public Payment(int buyerId, int productId, int productCount, Shipment shipment) {
+        super(buyerId, productId);
+        this.productCount = productCount;
+        this.Shipment = shipment;
     }
+    public double getTotalPay(Product product) {
+        return product.price;
+    }
+
     public boolean validate() {
         return false;
     }
     public Invoice perform() {
         return null;
     }
+
+
     @Override
     public boolean read(String content){
         return false;

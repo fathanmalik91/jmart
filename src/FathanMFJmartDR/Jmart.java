@@ -5,17 +5,22 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.Buffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 
+
+
 public class Jmart{
+
+    public static long DELIVERED_LIMIT_MS = 320;
+    public static long ON_DELIVERY_LIMIT_MS = 320;
+    public static long ON_PROGRESS_LIMIT_MS = 320;
+    public static long WAITING_CONF_LIMIT_MS = 320;
+
     public static List<Product> filterByCategory(List<Product> list, ProductCategory category){
         return Algorithm.collect(
                 list.iterator(),(Predicate<Product>) product -> category == product.category);
@@ -38,6 +43,8 @@ public class Jmart{
             }
         }
         return products;
+
+
     }
 
 
@@ -73,9 +80,48 @@ public class Jmart{
         return list;
     }
 
+    public static boolean paymentTimekeeper(Payment payment) {
+        Payment.Record record = payment.history.get(payment.history.size() - 1);
+        long elapsed = Math.abs(record.date.getTime() - (new Date()).getTime());
+
+        if(record.status == Invoice.Status.WAITING_CONFIRMATION && elapsed > WAITING_CONF_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FAILED, "Waiting"));
+            return true;
+        } else if(record.status == Invoice.Status.ON_PROGRESS && elapsed > ON_PROGRESS_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FAILED, "On process"));
+            return true;
+        } else if(record.status == Invoice.Status.ON_DELIVERY && elapsed > ON_DELIVERY_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.DELIVERED, "Delivering"));
+            return false;
+        } else if(record.status == Invoice.Status.DELIVERED && elapsed > DELIVERED_LIMIT_MS) {
+            payment.history.add(new Payment.Record(Invoice.Status.FINISHED, "Finished"));
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         try{
-            String filepath = "F:/GITHUB OOP/JMART/src/FathanMFJmartDR/account.json";
+            JsonTable<Payment> table = new JsonTable<>(Payment.class, "F:/GITHUB OOP/JMART/src/FathanMFJmartDR/randomPaymentList.Json");
+            ObjectPoolThread<Payment> paymentPool = new ObjectPoolThread<Payment>("Thread-PP", Jmart::paymentTimekeeper);
+            paymentPool.start();
+
+            table.forEach(payment -> paymentPool.add(payment));
+            while(paymentPool.size() !=0);
+            paymentPool.exit();
+
+            while (paymentPool.isAlive());
+            System.out.println("Thread exited successfully");
+            Gson gson = new Gson();
+            table.forEach(payment-> {
+                String history = gson.toJson(payment.history);
+                System.out.println(history);
+                    });
+        }catch (Throwable t)
+        {
+            t.printStackTrace();
+        }
+       /*      String filepath = "F:/GITHUB OOP/JMART/src/FathanMFJmartDR/account.json";
 
             JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
             tableAccount.add(new Account("name", "email", "password"));
@@ -86,7 +132,7 @@ public class Jmart{
 
 
 
-       /*     // sesuaikan argument method read sesuai dengan lokasi resource
+           // sesuaikan argument method read sesuai dengan lokasi resource
             List<Product> list = read("F:/GITHUB OOP/JMART/src/FathanMFJmartDR/randomProductList.json");
             List<Product> filtered = filterByPrice(list, 13000.0, 15000.0);
             filtered.forEach(product -> System.out.println(product.price));
@@ -96,10 +142,7 @@ public class Jmart{
             List<Product> accountFiltered = filterByAccountId(list, 1, -1, 5);
             accountFiltered.forEach(product -> System.out.println(product.name));
         */
-        }catch (Throwable t)
-        {
-            t.printStackTrace();
-        }
+
 
 
 
