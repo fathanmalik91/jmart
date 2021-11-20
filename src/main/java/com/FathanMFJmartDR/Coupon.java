@@ -1,6 +1,7 @@
 package com.FathanMFJmartDR;
 
 
+import com.FathanMFJmartDR.dbjson.Serializable;
 
 public class Coupon extends Serializable
 {

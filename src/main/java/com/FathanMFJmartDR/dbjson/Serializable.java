@@ -1,8 +1,7 @@
-package com.FathanMFJmartDR;
+package com.FathanMFJmartDR.dbjson;
 
 
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class Serializable implements Comparable <Serializable>

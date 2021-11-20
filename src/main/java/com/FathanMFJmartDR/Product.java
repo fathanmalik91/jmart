@@ -1,6 +1,8 @@
 package com.FathanMFJmartDR;
 
 
+import com.FathanMFJmartDR.dbjson.Serializable;
+
 /**
  * Write a description of class Product here.
  *

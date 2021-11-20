@@ -1,12 +1,12 @@
 package com.FathanMFJmartDR;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.nio.Buffer;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import com.FathanMFJmartDR.dbjson.JsonDBEngine;
+import com.FathanMFJmartDR.dbjson.JsonTable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -22,6 +22,14 @@ public class Jmart{
     public static long ON_DELIVERY_LIMIT_MS = 320;
     public static long ON_PROGRESS_LIMIT_MS = 320;
     public static long WAITING_CONF_LIMIT_MS = 320;
+
+
+    public static void main (String[] args){
+
+        JsonDBEngine.Run(Jmart.class);
+        SpringApplication.run(Jmart.class, args);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> JsonDBEngine.join()));
+    }
 
     public static List<Product> filterByCategory(List<Product> list, ProductCategory category){
         return Algorithm.collect(
@@ -104,7 +112,7 @@ public class Jmart{
 
 
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         try{
 
 
@@ -128,7 +136,7 @@ public class Jmart{
         {
             t.printStackTrace();
         }
-       /*      String filepath = "F:/GITHUB OOP/JMART/src/FathanMFJmartDR/account.json";
+            String filepath = "F:/GITHUB OOP/JMART/src/FathanMFJmartDR/account.json";
 
             JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
             tableAccount.add(new Account("name", "email", "password"));
@@ -166,7 +174,7 @@ public class Jmart{
     */
 
 
-    }
+
 }
 
 

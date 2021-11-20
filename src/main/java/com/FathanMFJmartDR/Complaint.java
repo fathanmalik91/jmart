@@ -1,4 +1,6 @@
 package com.FathanMFJmartDR;
+import com.FathanMFJmartDR.dbjson.Serializable;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 

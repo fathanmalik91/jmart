@@ -1,4 +1,6 @@
 package com.FathanMFJmartDR;
+import com.FathanMFJmartDR.dbjson.Serializable;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -21,9 +23,8 @@ public class Store extends Serializable
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
-    public Store(Account account, String name, String address, String phoneNumber) {
-        super(account.id);
-        this.name = name;
+    public Store(String name, String address, String phoneNumber) {
+        this.name =name;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
