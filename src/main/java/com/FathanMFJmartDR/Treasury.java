@@ -29,17 +29,17 @@ public class Treasury
      */
     public static final double  COMMISSION_MULTIPLIER()
     {
-        // put your code here
+
         return 0.05f;
     }
     public static  final double  BOTTOM_PRICE()
     {
-        // put your code here
+
         return 20000.0f;
     }
      public static  final double  BOTTOM_FEE()
     {
-        // put your code here
+
         return 1000.0f;
     }
     double price;

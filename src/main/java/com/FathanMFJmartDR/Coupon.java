@@ -13,19 +13,19 @@ public class Coupon extends Serializable
     public double minimum;
     
     public  enum Type
-{
+    {
     DISCOUNT, REBATE
-}
+    }
     
     
 
     /**
      * Constructor for objects of class Coupon
      */
-    public Coupon(int id, String name, int code, Type type, double cut, double minimum) 
+    public Coupon( String name, int code, Type type, double cut, double minimum)
     {
         // initialise instance variables
-        super(id);
+
         this.name= name;
         this.code= code;
         this.type= type;
