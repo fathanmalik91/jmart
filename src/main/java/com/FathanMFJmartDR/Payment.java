@@ -17,7 +17,7 @@ public class Payment extends Invoice
     public Shipment Shipment;
     public ArrayList<Record> history = new ArrayList<>();
 
-    static class Record {
+    public static class Record {
         public final Date date;
         public String message;
         public Status status;
