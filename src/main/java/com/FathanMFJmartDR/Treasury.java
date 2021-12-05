@@ -10,63 +10,31 @@ package com.FathanMFJmartDR;
 public class Treasury
 {
     // instance variables - replace the example below with your own
-    private int x;
+    public static final double BOTTOM_FEE = 1000.0;
+    public static final double BOTTOM_PRICE = 20000.0;
+    public static final double COMMISSION_MULTIPLIER = 0.05;
 
-    /**
-     * Constructor for objects of class PriceTag
-     */
-    public Treasury()
+    public static double getAdjustedPrice(double price, double discount)
     {
-        // initialise instance variables
-        x = 0;
+        return getDiscountedPrice(price, discount) + getAdminFee(price, discount);
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param
-     * @return    the sum of x and y
-     */
-    public static final double  COMMISSION_MULTIPLIER()
+    public static double getAdminFee(double price, double discount)
     {
-
-        return 0.05f;
-    }
-    public static  final double  BOTTOM_PRICE()
-    {
-
-        return 20000.0f;
-    }
-     public static  final double  BOTTOM_FEE()
-    {
-
-        return 1000.0f;
-    }
-    double price;
-    double discount;
-    public Treasury(double price){
-        this.price=price;
-        this.discount=0.0f;
-    }
-    public Treasury(double price, double discount){
-        this.price=price;
-        this.discount=discount;
-    }
-    private double getDiscountedPrice(){
-        if (this.discount > 100.0f) {
-            return 0;
+        if(getDiscountedPrice(price, discount) < BOTTOM_PRICE){
+            return BOTTOM_FEE;
         }else{
-        return  this.price - (this.price * this.discount/100.0f);
+            return getDiscountedPrice(price, discount) * COMMISSION_MULTIPLIER;
         }
     }
-    public double getAdminFee(){
-        if (getDiscountedPrice()< BOTTOM_PRICE()){
-            return BOTTOM_FEE();
-        }else{
-            return getDiscountedPrice() * COMMISSION_MULTIPLIER();
+    private static double getDiscountedPrice(double price, double discount)
+    {
+        if(discount > 100.0){
+            discount = 100.0;
         }
-    }
-    public double getAdjustedPrice(){
-        return getDiscountedPrice()+ getAdminFee();
+        if(discount == 100.0){
+            return 0.0;
+        }else{
+            return price * ((100.0 - discount)/100.0);
+        }
     }
 }

@@ -34,29 +34,31 @@ public class Coupon extends Serializable
         this.used= false;
     }
 
-    
-    public boolean isUsed()
+
+    public double apply(double price, double discount)
     {
-        return this.used;
+        used = true;
+        if(type == Type.DISCOUNT){
+            if(cut >= 100){
+                return (Treasury.getAdjustedPrice(price, discount) - Treasury.getAdjustedPrice(price, discount) * (100 / 100)); //cut max 100%
+            }else if(cut <= 0){
+                return (Treasury.getAdjustedPrice(price, discount) - Treasury.getAdjustedPrice(price, discount) * (0 / 100)); //cut min 0%
+            }else{
+                return (Treasury.getAdjustedPrice(price, discount) - Treasury.getAdjustedPrice(price, discount) * (cut / 100));
+            }
+        }
+        return (Treasury.getAdjustedPrice(price, cut) - cut);
     }
-    public boolean canApply(Treasury treasury){
-        if (treasury.getAdjustedPrice() >= minimum & used== false ){
+    public boolean canApply(double price, double discount)
+    {
+        if(Treasury.getAdjustedPrice(price, discount) >= minimum && !used){
             return true;
         }else{
             return false;
         }
     }
-    public double apply (Treasury treasury){
-        this.used=true;
-        if(type==Type.REBATE){
-            return treasury.getAdjustedPrice() - this.cut;
-        }
-        else{
-           return treasury.getAdjustedPrice() - (treasury.getAdjustedPrice() *(100- this.cut) /100);
-        }
-    }
-
-    public boolean read(String content){
-        return false;
+    public boolean isUsed()
+    {
+        return used;
     }
 }

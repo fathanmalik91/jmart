@@ -13,18 +13,13 @@ import java.util.regex.Matcher;
 public class Store extends Serializable
 {
     public String name, address, phoneNumber;
+    public double balance;
     public static final String REGEX_PHONE = "^\\d{9,12}$";
     public static final String REGEX_NAME = "^[A-Z](?!.*(\\s)\1).{4,20}$";
 
-    public Store(int accountId, String name, String address, String phoneNumber)
-    {
-        super(accountId);
+    public Store(String name, String address, String phoneNumber, double balance){
         this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-    }
-    public Store(String name, String address, String phoneNumber) {
-        this.name =name;
+        this.balance = balance;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
